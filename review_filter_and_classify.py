@@ -1,9 +1,9 @@
 import pandas as pd
 import re
 
-Privacy_List = ['abusivo', 'adware', 'comportamento', 'comportamental', 'consentimento', 'permissão', 'duvidoso', 'suspeito', 'criptografar', 'criptografia', 'criptografa', 'ético', 'ética', 'moral', 'fraude', 'hack', 'hackeado', 'invadido', 'hacking', 'pirataria', 'hacks', 'inseguro', 'software livre', 'código aberto', 'permissão', 'autorização', 'permissões', 'autorizações', 'phishing', 'privacidade', 'protegido', 'seguro', 'proteção', 'defesa', 'enganar', 'seguro', 'fraude', 'golpe', 'enganado', 'golpista', 'golpistas', 'fraude', 'seguro', 'protegido', 'segurança', 'código-fonte', 'spyware', 'espião', 'terceiro', 'terceiros', 'confiavelmente', 'confiança', 'credibilidade', 'confiável', 'antiético', 'antiética', 'desprotegido', 'desproteção', 'inseguro', 'perigoso', 'inseguro', 'desonesto', 'não confiável']
+PRIVACY_LIST = ['abusivo', 'adware', 'comportamento', 'comportamental', 'consentimento', 'permissão', 'duvidoso', 'suspeito', 'criptografar', 'criptografia', 'criptografa', 'ético', 'ética', 'moral', 'fraude', 'hack', 'hackeado', 'invadido', 'hacking', 'pirataria', 'hacks', 'inseguro', 'software livre', 'código aberto', 'permissão', 'autorização', 'permissões', 'autorizações', 'phishing', 'privacidade', 'protegido', 'seguro', 'proteção', 'defesa', 'enganar', 'seguro', 'fraude', 'golpe', 'enganado', 'golpista', 'golpistas', 'fraude', 'seguro', 'protegido', 'segurança', 'código-fonte', 'spyware', 'espião', 'terceiro', 'terceiros', 'confiavelmente', 'confiança', 'credibilidade', 'confiável', 'antiético', 'antiética', 'desprotegido', 'desproteção', 'inseguro', 'perigoso', 'inseguro', 'desonesto', 'não confiável']
 
-categories = {
+CATEGORIES = {
     'politica': {
         'keywords': ["políticas", "política", "regulamento", "regulamentos", "regulatório"]
     },
@@ -74,13 +74,13 @@ def classify_and_filter(input_csv, output_csv):
         text = normalize_text(str(raw))
         
 
-        if not contains_any(text, Privacy_List):
+        if not contains_any(text, PRIVACY_LIST):
             continue
             
         new_row = row.to_dict()
         
-        # marca categorias
-        for category_name, category in categories.items():
+        # check for each category and add a new column with 'Yes' if any keyword is found
+        for category_name, category in CATEGORIES.items():
             if contains_any(text, category['keywords']):
                 new_row[category_name] = 'Yes'
             else:
@@ -91,7 +91,7 @@ def classify_and_filter(input_csv, output_csv):
     filtered_df = pd.DataFrame(filtered_rows)
     
 
-    for category_name in categories.keys():
+    for category_name in CATEGORIES.keys():
         if category_name not in filtered_df.columns:
             filtered_df[category_name] = ''
             
