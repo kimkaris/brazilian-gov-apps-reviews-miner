@@ -1,3 +1,4 @@
+# Brazilian Government Apps Reviews Miner
 This repository contains the extraction and data processing scripts developed for my master's dissertation. 
 The goal of this pipeline is to mine user reviews on the Google Play Store to identify flaws, privacy complaints, and risk perceptions regarding the use of massively adopted Brazilian government platforms: **gov.br**, **Meu INSS**, and **CNH do Brasil**.
 
@@ -11,7 +12,7 @@ The extraction and analysis workflow was built to ensure methodological reproduc
 pip install google-play-scraper pandas
 ```
 
-**## References**
+## References
 
 The keyword dictionaries (`PRIVACY_LIST` and `CATEGORIES`) used in the filtering step of this project were adapted and translated to Portuguese from the methodology proposed by **Haggag et al. (2025)**.
 If you use or build upon the filtering logic, please also consider citing the original authors:
